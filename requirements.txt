@@ -1,0 +1,14 @@
+pandas
+numpy
+seaborn
+matplotlib
+pyjanitor
+langchain_aws
+snowflake-snowpark-python[pandas]
+langchain_community
+snowflake-sqlalchemy
+snowflake-connector-python
+streamlit
+langchain_mistralai
+langchain-ollama==0.2.2
+langchain_huggingface
