@@ -1,3 +1,4 @@
 .env
 .DS_Store
 testing_bot.ipynb
+__pycache__
