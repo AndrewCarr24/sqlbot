@@ -1,32 +1,19 @@
 import chatbot 
 import time 
-# from langchain_ollama import ChatOllama
-# from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
-
-from langchain_mistralai import ChatMistralAI
 from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+
+# Get OpenAI API key
 load_dotenv()
-# Initialize the chatbot
-mistral_llm = ChatMistralAI(
-    model="mistral-large-latest",
+
+# Instantiate chatmodel
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
     temperature=0,
-    max_retries=24,
+    max_tokens=None,
+    timeout=None,
+    max_retries=0
 )
-
-# ollama_3_2_llm = ChatOllama(
-#     model="llama3.2",
-#     temperature=0,
-#     # other params...
-# )
-# llm = HuggingFaceEndpoint(
-#     repo_id="HuggingFaceH4/zephyr-7b-beta",
-#     task="text-generation",
-#     max_new_tokens=512,
-#     do_sample=False,
-#     repetition_penalty=1.03,
-# )
-# chat_model = ChatHuggingFace(llm=llm).bind_tools(chatbot.get_tools())
-
 
 inp_sys_msg = """
 You are an AI assistant hooked up to the Chinook. 
@@ -163,8 +150,8 @@ Always include the SQL query in your response.
 """
 
 # Create chatbot object with history, tools, and system prompt 
-bedrock_llm_with_history = chatbot.LLMWithHistory(mistral_llm,
-                                          tools = chatbot.get_tools(),
+bedrock_llm_with_history = chatbot.LLMWithHistory(llm,
+                                          tools = chatbot.get_tools()[:1],
                                           system_message = inp_sys_msg)
 
 
