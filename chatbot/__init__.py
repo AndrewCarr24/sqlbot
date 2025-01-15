@@ -1,1 +1,1 @@
-from .sqlbot import LLMWithHistory, get_tools
+from .sqlbot import LLMWithHistory, get_tools, get_db_path
