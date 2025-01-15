@@ -17,16 +17,30 @@ from langchain_core.messages import (
 )
 from langchain_core.tools import BaseTool
 from langchain_community.tools import QuerySQLDatabaseTool
-from langchain_community.tools import WriteFileTool
 import time 
+import sys
+
+def get_db_path():
+    """
+    Get the database path from command-line arguments.
+    Returns:
+        str: The database path.
+    """
+    # if len(sys.argv) > 1:
+    #     print(f"\nConnecting to {sys.argv[1]}.db . . .")
+    #     return f"{sys.argv[1]}.db"
+    # else:
+    #     raise ValueError("No database name provided in command-line arguments.")
+
+    return "input_data/chinook.db"
 
 # Get tools for chatbot
-db_path = "chinook.db"
-engine = create_engine(f"sqlite:///input_data/{db_path}")
+db_path = get_db_path() # f"{sys.argv[1]}.db"
+engine = create_engine(f"sqlite:///{db_path}")
 db_engine = SQLDatabase(engine)
 
 def get_tools() -> list[langchain_core.tools.BaseTool]:  
-    return[QuerySQLDatabaseTool(db = db_engine), WriteFileTool()]
+    return[QuerySQLDatabaseTool(db = db_engine)]
 
 # LLMWithHistory 
 @dataclasses.dataclass
@@ -75,7 +89,7 @@ class LLMWithHistory:
             self.llm = self.llm.bind_tools(self.tools)
             self.from_list(self.tools)
           
-    def send_message_to_llm(self, message: str):
+    def send_message_to_llm(self, message: str, print_response: bool = True):
         """
         Send a message to LLM and handle the response.
         Args:
@@ -113,12 +127,12 @@ class LLMWithHistory:
                 
                 # Get tool name 
                 tool_name = tool_info['name']
-                print(f"Running {tool_name} tool...\n")
+                # print(f"Running {tool_name} tool...\n")
                 
                 tool_args = tool_info['args']
                 tool_output = self.tool_dict[tool_name].invoke(tool_args)
                 time.sleep(1)
-                print("Delay to handle rate limit.")
+                # print("Delay to handle rate limit.")
 
                 tool_response = ToolMessage(content=tool_output, 
                             tool_call_id=tool_info['id'])
@@ -130,10 +144,10 @@ class LLMWithHistory:
             self.history.append(response)
                 
         # Stream the response 
-        for fake_token in response.content:
-            print(fake_token, end="", flush=True)
-            time.sleep(0.005)
-            
-        print("\n")
+        if print_response:
+            for fake_token in response.content:
+                print(fake_token, end="", flush=True)
+                time.sleep(0.005)
+            print("\n")
 
          
