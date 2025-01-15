@@ -118,6 +118,13 @@ class LLMWithHistory:
         self.history.append(response)
         # self.add_cost(response)
         
+        # If AIMessage with tool calls and print_response enabled, stream the response 
+        if response.tool_calls and print_response and isinstance(response, AIMessage):
+            for fake_token in response.content:
+                print(fake_token, end="", flush=True)
+                time.sleep(0.005)
+            print("\n")
+
         # Handle tool calls if necessary
         # while response.response_metadata['finish_reason'] == "tool_calls":
         while response.tool_calls:
