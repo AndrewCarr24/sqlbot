@@ -73,7 +73,7 @@ while not should_exit:
             pass
         else:
             print("\n")
-            chatbot_init.send_message_to_llm(user_text, print_response=True)
+            chatbot_main.send_message_to_llm(user_text, print_response=True)
             time.sleep(0.02)
 
 
