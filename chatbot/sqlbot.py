@@ -118,7 +118,7 @@ class LLMWithHistory:
         self.history.append(response)
         # self.add_cost(response)
         
-        # If AIMessage with tool calls and print_response enabled, stream the response 
+        # If AIMessage with tool calls and print_response enabled, stream the response (for interim AI responses)
         if response.tool_calls and print_response and isinstance(response, AIMessage):
             for fake_token in response.content:
                 print(fake_token, end="", flush=True)
