@@ -1,8 +1,6 @@
 import warnings
 warnings.filterwarnings("ignore")
 from .helper_utils import *
-from langchain_community.utilities import SQLDatabase
-from sqlalchemy import create_engine 
 import langchain_core.tools
 import dataclasses
 from langchain_core.language_models import BaseChatModel
@@ -16,31 +14,9 @@ from langchain_core.messages import (
     ToolMessage,
 )
 from langchain_core.tools import BaseTool
-from langchain_community.tools import QuerySQLDatabaseTool
+
 import time 
-import sys
 
-def get_db_path():
-    """
-    Get the database path from command-line arguments.
-    Returns:
-        str: The database path.
-    """
-    # if len(sys.argv) > 1:
-    #     print(f"\nConnecting to {sys.argv[1]}.db . . .")
-    #     return f"{sys.argv[1]}.db"
-    # else:
-    #     raise ValueError("No database name provided in command-line arguments.")
-
-    return "input_data/chinook.db"
-
-# Get tools for chatbot
-db_path = get_db_path() # f"{sys.argv[1]}.db"
-engine = create_engine(f"sqlite:///{db_path}")
-db_engine = SQLDatabase(engine)
-
-def get_tools() -> list[langchain_core.tools.BaseTool]:  
-    return[QuerySQLDatabaseTool(db = db_engine)]
 
 # LLMWithHistory 
 @dataclasses.dataclass

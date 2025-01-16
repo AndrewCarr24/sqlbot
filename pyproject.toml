@@ -32,3 +32,5 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/andrewcarr24/sqlbot"
 
+[project.scripts]
+start_bot_tool = "sqlbot.run_from_terminal:start_bot"
