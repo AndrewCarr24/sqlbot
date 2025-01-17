@@ -1,2 +1,0 @@
-[console_scripts]
-start_bot_tool = sqlbot.run_from_terminal:start_bot

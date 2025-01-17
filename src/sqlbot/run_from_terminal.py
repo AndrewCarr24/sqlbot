@@ -1,13 +1,52 @@
 from . import chatbot 
 import time 
-from dotenv import load_dotenv
+from dotenv import load_dotenv, set_key
 from langchain_openai import ChatOpenAI
 import argparse
 from langchain_community.utilities import SQLDatabase
 from langchain_community.tools import QuerySQLDatabaseTool
 from sqlalchemy import create_engine 
+import getpass
+import os 
 
 def start_bot():
+
+    def get_api_key():
+
+        # Define the path for the .env file in the project root directory
+        dotenv_path = os.path.join(os.getcwd(), ".env")
+
+        # Load the .env file if it exists
+        load_dotenv(dotenv_path)
+
+        # First, check if the API key is in the environment variables
+        api_key = os.getenv("OPENAI_API_KEY")
+
+        if api_key:
+            return api_key
+
+        # If not, check if the .env file exists, if not, create it
+        if not os.path.exists(dotenv_path):
+            with open(dotenv_path, "w"):  # Create an empty .env file
+                pass
+            print(f".env file created at {dotenv_path}")
+
+        # If not, prompt the user to input it securely
+        print("API key not found in environment variables or configuration.")
+        api_key = getpass.getpass("Please enter your API key: ")
+
+        # Optionally, confirm the key
+        if not api_key:
+            raise ValueError("No API key provided. Exiting.")
+
+        # Set the API key to the environment variable for future use
+        os.environ["OPENAI_API_KEY"] = api_key
+
+        # Save the API key to the .env file if it's not already there
+        set_key(dotenv_path, "OPENAI_API_KEY", api_key)
+        print(f"API key has been saved to {dotenv_path}.")
+
+        return api_key
 
     def get_db_path():
         """
@@ -22,6 +61,9 @@ def start_bot():
         print(f"\nConnecting to {args.db}.db . . .")
         return f"{args.db}.db"
     
+    # Set API key
+    get_api_key()       
+
     # Get tools for chatbot
     db_path = get_db_path() # f"{sys.argv[1]}.db"
     engine = create_engine(f"sqlite:///{db_path}")
@@ -102,4 +144,5 @@ def start_bot():
                 time.sleep(0.02)
 
 if __name__ == "__main__":
+    get_api_key()
     start_bot()
