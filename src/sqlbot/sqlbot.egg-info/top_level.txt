@@ -1,2 +1,0 @@
-chatbot
-run_from_terminal
