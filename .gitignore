@@ -4,3 +4,4 @@ testing_bot.ipynb
 __pycache__
 testing
 chatbot/helper_utils.py
+*.egg-info/
