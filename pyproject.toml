@@ -9,7 +9,7 @@ requires-python = ">=3.11"
 authors = [
   { name = "Andrew J. Carr", email = "andrewcarr24@github.com" },
 ]
-description = "Command line tool for querying SQL databases with GPT."
+description = "Command line tool for querying SQL databases through an LLM."
 readme = "README.md"
 license = { text = "MIT License" }
 keywords = ["LLMs", "agents"]
