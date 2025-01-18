@@ -12,7 +12,7 @@ To run from the command line, type `start_bot_tool --db [path to db]`. `[path to
 
 This repository includes an example database, the public Chinook database, which has information on album sales, including customers, artists, tracks, and invoices.
 
-`!start_bot_tool --db input_data/chinook`
+`start_bot_tool --db input_data/chinook`
 
 ![](img/readme_pic1.png)
 
