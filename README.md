@@ -1,4 +1,4 @@
-## sqlbot
+# sqlbot
 
 sqlbot is an LLM chatbot that you can run from the command line. The bot is connected to a SQL database that the user specifies as a system parameter.
 
