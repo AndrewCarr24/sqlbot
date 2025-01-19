@@ -14,9 +14,15 @@ This repository includes an example database, the public Chinook database, which
 
 `start_bot_tool --db input_data/chinook`
 
+When you first run this command, you will be asked for your OpenAI API key.
+
+![](img/readme_pic4.png)
+
+Enter your key and press Enter. The key will be saved in a .env file in the project directory for future use. After you enter your key, the sqlbot utility will start up.
+
 ![](img/readme_pic1.png)
 
-This command line utility is a Langchain ChatModel object connected to a tool to query the db. Upon launch, the tool automatically sends and initial prompt to the LLM to obtain metadata about the attached db. This metadata is used as a system prompt in subsequent queries. 
+This command line utility is a Langchain Chat Model connected to a tool to query the db. Upon launch, the tool automatically sends an initial prompt to the LLM to obtain metadata about the attached db. This metadata is used as a system prompt in subsequent queries. 
 
 Here's an example of the tool in action - 
 
