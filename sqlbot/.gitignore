@@ -1,0 +1,9 @@
+.env
+.DS_Store
+testing_bot.ipynb
+__pycache__
+testing
+chatbot/helper_utils.py
+*.egg-info/
+src/sqlbot/sqlbot.egg-info/
+sqlbot.egg-info/
