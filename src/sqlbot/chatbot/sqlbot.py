@@ -13,7 +13,6 @@ from langchain_core.messages import (
     ToolMessage,
 )
 from langchain_core.tools import BaseTool
-
 import time 
 
 
@@ -89,7 +88,6 @@ class LLMWithHistory:
         
         # Invoke the LLM with the current history
         response = self.llm.invoke(self.history)
-        time.sleep(1)
         self.history.append(response)
         # self.add_cost(response)
         
@@ -113,7 +111,6 @@ class LLMWithHistory:
                 
                 tool_args = tool_info['args']
                 tool_output = self.tool_dict[tool_name].invoke(tool_args)
-                time.sleep(1)
                 # print("Delay to handle rate limit.")
 
                 tool_response = ToolMessage(content=tool_output, 
