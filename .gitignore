@@ -7,3 +7,4 @@ chatbot/helper_utils.py
 *.egg-info/
 src/sqlbot/sqlbot.egg-info/
 sqlbot.egg-info/
+src/sqlbot/chatbot/helper_utils.py
