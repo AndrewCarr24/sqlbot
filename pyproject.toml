@@ -27,7 +27,7 @@ dependencies = [
     "langchain-core>=0.3.29",
     "typing-inspect>=0.9.0",
     "typing_extensions>=4.12.2",
-	"streamlit",
+	"streamlit>=1.24.0",
 	"altair==4.0"
 ]
 
