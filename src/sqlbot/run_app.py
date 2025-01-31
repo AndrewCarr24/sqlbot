@@ -1,4 +1,5 @@
 import subprocess
+import os 
 
 def main():
     # Get the current directory of this script
