@@ -13,7 +13,8 @@ from langchain_core.messages import (
     ToolMessage,
 )
 from langchain_core.tools import BaseTool
-import time 
+import time
+import json 
 
 
 # LLMWithHistory 
@@ -62,6 +63,24 @@ class LLMWithHistory:
         if self.tools:
             self.llm = self.llm.bind_tools(self.tools)
             self.from_list(self.tools)
+
+    def get_sql_query(self):
+        """
+        Retrieves the SQL queries from the chatbot's history.
+
+        Returns:
+            str: The SQL queries joined by newlines.
+        """
+        ai_msgs_with_tool_calls = [msg for msg in self.history if isinstance(msg, AIMessage) and msg.additional_kwargs.get('tool_calls')]
+
+        if ai_msgs_with_tool_calls:
+            sql_calls = [json.loads(call.get('function').get('arguments')).get('query') for call in ai_msgs_with_tool_calls[-1].additional_kwargs['tool_calls'] if call.get('function').get('name') == 'sql_db_query']
+            if sql_calls:
+                self.query_output = '\n\n'.join(sql_calls)
+            else:
+                self.query_output = ''
+        else:
+            self.query_output = ''
           
     def send_message_to_llm(self, message: str, print_response: bool = True):
         """
