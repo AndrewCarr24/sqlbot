@@ -8,3 +8,4 @@ chatbot/helper_utils.py
 src/sqlbot/sqlbot.egg-info/
 sqlbot.egg-info/
 src/sqlbot/chatbot/helper_utils.py
+build/
