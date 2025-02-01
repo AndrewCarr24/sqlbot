@@ -20,7 +20,6 @@ def get_api_key():
     if not api_key:
         if not os.path.exists(dotenv_path):
             open(dotenv_path, "w").close()
-            st.write(f".env file created at {dotenv_path}")
 
         if "api_key_submitted" not in st.session_state:
             st.session_state.api_key_submitted = False
@@ -34,15 +33,11 @@ def get_api_key():
                     set_key(dotenv_path, "OPENAI_API_KEY", api_key)
                     st.session_state.api_key = api_key
                     st.session_state.api_key_submitted = True
-                    st.write("API key has been saved.")
                     st.rerun()
                 else:
                     st.error("No API key provided. Please enter your API key.")
-        else:
-            st.write("API key has been saved.")
     else:
         st.session_state.api_key = api_key
-        st.write("API key found.")
 
 # Call the function to ensure the API key is set
 if "api_key" not in st.session_state:
