@@ -58,11 +58,6 @@ if "api_key" in st.session_state:
 			max_retries=0
 		)
 
-		# # Connect to the Chinook SQL database
-		# db_path = "input_data/chinook.db"
-		# engine = create_engine(f"sqlite:///{db_path}")
-		# db_engine = SQLDatabase(engine)
-
 		# Connect to the Chinook SQL database
 		with pkg_resources.path(data, 'chinook.db') as db_path:
 			engine = create_engine(f"sqlite:///{db_path}")
@@ -196,6 +191,16 @@ if "api_key" in st.session_state:
 			/* Reduce space between sidebar and main content */
 			[data-testid="stSidebar"][aria-expanded="true"] {
 				margin-right: -3rem;  /* Negative margin reduces the gap */
+			}
+
+			h1 {
+			    font-family: 'Montserrat', sans-serif !important;
+			    color: #2C3E50 !important;
+			}
+
+			h2 {
+			    font-family: 'Arial', monospace !important;
+			    color: #2C3E50 !important;
 			}
 		</style>
 	""", unsafe_allow_html=True)
