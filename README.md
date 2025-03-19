@@ -1,6 +1,6 @@
-# sqlbot
+# SQLbot
 
-sqlbot is an LLM chatbot that you can run from the command line. The bot is connected to a SQL database that the user specifies as a system parameter.
+SQLbot is an LLM chatbot that you can run from the command line. The bot is connected to a SQL database that the user specifies as a system parameter.
 
 ### Installation 
 
@@ -18,7 +18,7 @@ When you first run this command, you will be asked for your OpenAI API key.
 
 ![](img/readme_pic4.png)
 
-Enter your key and press Enter. The key will be saved in a .env file in the project directory for future use. After you enter your key, the sqlbot utility will start up.
+Enter your key and press Enter. The key will be saved in a .env file in the project directory for future use. After you enter your key, the SQLbot utility will start up.
 
 ![](img/readme_pic1.png)
 
